@@ -1,17 +1,19 @@
 function init() {
   
-  console.log('content loaded')
 
   const grid = document.querySelector('.grid')
-  const width = 10
-  const cellCount = width * width
+  const width = 11
+  const height = 10
+  const cellCount = width * height
   const cells = []
 
+  let shipStartingPosition = 104
+  let shipCurrentPosition = 0
+  const shipClass = 'ship'
+  
 
-  const ship = document.querySelector('.ship')
 
-
-//grid
+/* CREATING GRID */
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
@@ -19,13 +21,21 @@ function init() {
       cell.innerText = i
       grid.appendChild(cell)
       cells.push(cell)
-      console.log('CELL>>', cell)
     }
-
   }
-
   createGrid()
 
+/*ADDING SHIP*/
 
+  addShip(shipStartingPosition)
+
+  function addShip(position) {
+    console.log('ship>>', cells[position])
+    cells[position].classList.add(shipClass)
+  }
+
+  
+
+  document.addEventListener('keyup', controls)
 }
 window.addEventListener('DOMContentLoaded', init)
