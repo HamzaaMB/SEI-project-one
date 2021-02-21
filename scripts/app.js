@@ -45,20 +45,18 @@ function init() {
   /* CONTROLS FOR THE GAME */
 
   function shipControls(event) {
+    
     const key = event.keyCode
-
     removeShip(shipCurrentPosition)
+
     if (key === 37 && shipCurrentPosition % width !== 0) {
       shipCurrentPosition--
-      console.log('left', shipCurrentPosition)
     } else if (key === 38) {
-      // console.log('invalid key', shipCurrentPosition)
+      console.log('invalid key')
     } else if (key === 39 && shipCurrentPosition % width !== width - 1 ) {
       shipCurrentPosition++
-      // console.log('right', shipCurrentPosition)
     } else if (key === 40 && shipCurrentPosition + width <= width * height - 1) {
       shipCurrentPosition += width
-      // console.log('down',shipCurrentPosition)
     } else {
       // console.log('invalid key')
     }
@@ -73,21 +71,29 @@ function init() {
 
 
   function laserControls(event) {
-    console.log('laser go')
     const key = event.keyCode
 
     if (key === 32) {
-      console.log('spacebar is being pressedr>>')
-      cells[93].classList.add(laserClass)
-
+      for (let i = 1; i <= height - 2; i++) {
+        cells[shipCurrentPosition - width * i].classList.add(laserClass)
+      }
     }
+
   }
+
 
   /*EVENT LISTENERS*/
 
   document.addEventListener('keyup', laserControls)
   document.addEventListener('keydown', shipControls)
+
+  // FOR LOOP FOR LASER MOVEMENT
+// const laserMove = shipCurrentPosition - width
+// For (let i = 1; i <= height - 1; i++) {
+  // console.log(i)
+  // cells[laserMove * i].classList.add(laserClass)
 }
 
 
 window.addEventListener('DOMContentLoaded', init)
+
