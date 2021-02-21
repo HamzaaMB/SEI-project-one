@@ -47,3 +47,10 @@ body {
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
+.laser { 
+    background-image: url(../images/laser.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
