@@ -11,6 +11,10 @@ function init() {
   let shipStartingPosition = 104
   let shipCurrentPosition = 104
   
+  const alienClass = 'alien'
+  let alienStartingPosition = 0
+
+  
 
 
 /* CREATING GRID */
@@ -25,7 +29,7 @@ function init() {
   }
   createGrid()
 
-/*ADDING SHIP*/
+/*ADDING and REMOVING SHIP*/
 
   addShip(shipStartingPosition)
 
@@ -37,20 +41,21 @@ function init() {
     cells[position].classList.remove(shipClass)
   }
 
-  function controls(event) {
+  /* CONTROLS FOR THE GAME */
+
+  function shipControls(event) {
     const key = event.keyCode
 
     removeShip(shipCurrentPosition)
-    if (key === 37) {
+    if (key === 37 && shipCurrentPosition % width !== 0) {
       shipCurrentPosition--
       console.log('left', shipCurrentPosition)
     } else if (key === 38) {
-      shipCurrentPosition -= width
-      console.log('up', shipCurrentPosition)
-    } else if (key === 39) {
+      console.log('invalid key', shipCurrentPosition)
+    } else if (key === 39 && shipCurrentPosition % width !== width - 1 ) {
       shipCurrentPosition++
       console.log('right', shipCurrentPosition)
-    } else if (key === 40) {
+    } else if (key === 40 && shipCurrentPosition + width <= width * height - 1) {
       shipCurrentPosition += width
       console.log('down',shipCurrentPosition)
     } else {
@@ -59,7 +64,12 @@ function init() {
     addShip(shipCurrentPosition)
   }
 
+  function alienControls() {
+    console.log('alien alive')
+  }
 
-  document.addEventListener('keyup', controls)
+  /*EVENT LISTENERS*/
+
+  document.addEventListener('keydown', shipControls)
 }
 window.addEventListener('DOMContentLoaded', init)
