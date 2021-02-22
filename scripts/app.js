@@ -72,10 +72,12 @@ function init() {
 
   function laserControls(event) {
     const key = event.keyCode
-
     if (key === 32) {
       for (let i = 1; i <= height - 2; i++) {
         cells[shipCurrentPosition - width * i].classList.add(laserClass)
+      }
+      for (let i = 0 ; i <= height - 3; i++) {
+        cells[shipCurrentPosition - width * i].classList.remove(laserClass)
       }
     }
 
