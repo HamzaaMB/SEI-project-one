@@ -12,14 +12,15 @@ function init() {
   let shipCurrentPosition = 104
   
   const alienClass = 'alien'
-  let alienStartingPosition = 16
+  let alienStartingPosition = []
+
 
   const laserClass = 'laser'
-  let laserCurrentPosition = 104
+  let laserPosition = 104
 
 
 
-/* CREATING GRID */
+/* CREATING GRID and ALIENS */
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
@@ -30,6 +31,15 @@ function init() {
     }
   }
   createGrid()
+
+  function createAliens () {
+    const alienArray = cells.slice(11,22)
+    alienArray.forEach(alien => {
+      return alien.classList.add(alienClass)
+    
+    })
+  }
+  createAliens()
 
 /*ADDING and REMOVING SHIP*/
 
@@ -64,30 +74,34 @@ function init() {
     addShip(shipCurrentPosition)
   }
 
-  function alienControls() {
-    // console.log('alien alive')
-    cells[alienStartingPosition].classList.add(alienClass)
-  }
-  alienControls()
 
+  function createLaser() {
+    cells[laserPosition].classList.add('laser')
+  }
+  function removeLaser() {
+    cells[laserPosition].classList.remove('laser')
+  }
+
+
+
+  function moveLaser() {
+    removeLaser()
+    laserPosition = laserPosition - width
+    createLaser()
+  }
+  moveLaser()
 
   function laserControls(event) {
     const key = event.keyCode
-    let laserCurrentPosition = shipCurrentPosition
-    if (key === 32) {
-      for (let i = 1; i <= height - 2; i++) {
-        const timerId = setInterval(() => {
-          cells[laserCurrentPosition - width * i].classList.add(laserClass)
-          console.log('going up')
-          clearInterval(timerId)
-        }, 300 * i)
+    console.log('laser controller active')
+    const timerId = setInterval(() => {
+      if (key === 32) { 
+        moveLaser()
+      } else {
+        clearInterval(timerId)
       }
-    } else {
-      console.log('not working')
-    }
+    }, 500)
   }
-
-
 
 
   /*EVENT LISTENERS*/
@@ -100,6 +114,23 @@ function init() {
 
 
 window.addEventListener('DOMContentLoaded', init)
+
+
+ // function laserControls(event) {
+  //   const key = event.keyCode
+  //   let laserCurrentPosition = shipCurrentPosition
+  //   if (key === 32) {
+  //     for (let i = 1; i <= height - 2; i++) {
+  //       const timerId = setInterval(() => {
+  //         cells[laserCurrentPosition - width * i].classList.add(laserClass)
+  //         console.log('going up')
+  //         clearInterval(timerId)
+  //       }, 300 * i)
+  //     }
+  //   } else {
+  //     console.log('not working')
+  //   }
+  // }
 
     //   for (let i = 0 ; i <= height - 3; i++) {
     //     cells[shipCurrentPosition - width * i].classList.remove(laserClass)
