@@ -15,7 +15,8 @@ function init() {
   let alienStartingPosition = 16
 
   const laserClass = 'laser'
-  
+  let laserCurrentPosition = 104
+
 
 
 /* CREATING GRID */
@@ -72,16 +73,21 @@ function init() {
 
   function laserControls(event) {
     const key = event.keyCode
+    let laserCurrentPosition = shipCurrentPosition
     if (key === 32) {
       for (let i = 1; i <= height - 2; i++) {
-        cells[shipCurrentPosition - width * i].classList.add(laserClass)
+        const timerId = setInterval(() => {
+          cells[laserCurrentPosition - width * i].classList.add(laserClass)
+          console.log('going up')
+          clearInterval(timerId)
+        }, 300 * i)
       }
-      for (let i = 0 ; i <= height - 3; i++) {
-        cells[shipCurrentPosition - width * i].classList.remove(laserClass)
-      }
+    } else {
+      console.log('not working')
     }
-
   }
+
+
 
 
   /*EVENT LISTENERS*/
@@ -89,13 +95,20 @@ function init() {
   document.addEventListener('keyup', laserControls)
   document.addEventListener('keydown', shipControls)
 
-  // FOR LOOP FOR LASER MOVEMENT
-// const laserMove = shipCurrentPosition - width
-// For (let i = 1; i <= height - 1; i++) {
-  // console.log(i)
-  // cells[laserMove * i].classList.add(laserClass)
+
 }
 
 
 window.addEventListener('DOMContentLoaded', init)
 
+    //   for (let i = 0 ; i <= height - 3; i++) {
+    //     cells[shipCurrentPosition - width * i].classList.remove(laserClass)
+    //   }
+    // }
+
+
+  // FOR LOOP FOR LASER MOVEMENT
+// const laserMove = shipCurrentPosition - width
+// For (let i = 1; i <= height - 1; i++) {
+  // console.log(i)
+  // cells[laserMove * i].classList.add(laserClass)m
