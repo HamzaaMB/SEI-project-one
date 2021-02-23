@@ -14,10 +14,8 @@ function init() {
   const alienClass = 'alien'
   let alienStartingPosition = []
 
-
   const laserClass = 'laser'
   let laserPosition = 104
-
 
 
 /* CREATING GRID and ALIENS */
@@ -42,7 +40,6 @@ function init() {
     })
   }
   createAliens()
-  console.log(alienArray)
 
 /*ADDING and REMOVING SHIP*/
 
@@ -85,7 +82,10 @@ function init() {
     cells[laserPosition].classList.remove('laser')
   }
 
+  let shootArray = []
+  shootArray = cells.slice(99,110)
 
+  console.log(typeof(Number(shootArray[0].innerText)))
 
 
   function moveLaser() {
@@ -95,11 +95,11 @@ function init() {
   }
 
 
+
   function laserControls(event) {
     const key = event.keyCode
     const timerId = setInterval(() => {
       if (key === 32) {
-        console.log(cells.innerText)
         moveLaser()
       } else {
         clearInterval(timerId)
@@ -112,6 +112,10 @@ function init() {
 
   document.addEventListener('keyup', laserControls)
   document.addEventListener('keydown', shipControls)
+  function laserKeys () {
+    for (let i = 0; i < shootArray.length; i++) 
+      shootArray[i].addEventListener('keyup', moveLaser)
+  }
 
 
 }
