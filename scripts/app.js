@@ -32,14 +32,17 @@ function init() {
   }
   createGrid()
 
+  let alienArray = []
+  alienArray = cells.slice(11,22)
+
   function createAliens () {
-    const alienArray = cells.slice(11,22)
     alienArray.forEach(alien => {
       return alien.classList.add(alienClass)
     
     })
   }
   createAliens()
+  console.log(alienArray)
 
 /*ADDING and REMOVING SHIP*/
 
@@ -84,23 +87,24 @@ function init() {
 
 
 
+
   function moveLaser() {
     removeLaser()
     laserPosition = laserPosition - width
     createLaser()
   }
-  moveLaser()
+
 
   function laserControls(event) {
     const key = event.keyCode
-    console.log('laser controller active')
     const timerId = setInterval(() => {
-      if (key === 32) { 
+      if (key === 32) {
+        console.log(cells.innerText)
         moveLaser()
       } else {
         clearInterval(timerId)
       }
-    }, 500)
+    }, 200)
   }
 
 
@@ -115,6 +119,15 @@ function init() {
 
 window.addEventListener('DOMContentLoaded', init)
 
+
+  // let laserArray = []
+  // laserArray = cells.slice(99,110)
+  // function shootLaser() {
+  //   laserArray.forEach(laser => {
+  //     return Number(laser.innerText) - width
+  //   })
+  // }
+  // shootLaser()
 
  // function laserControls(event) {
   //   const key = event.keyCode
