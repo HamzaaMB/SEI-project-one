@@ -12,10 +12,11 @@ function init() {
   let shipCurrentPosition = 104
   
   const alienClass = 'alien'
-  let alienStartingPosition = []
+  let alienStartingPosition = 0
+
 
   const laserClass = 'laser'
-  let laserPosition = 104
+  let laserPosition 
 
 
 /* CREATING GRID and ALIENS */
@@ -31,7 +32,7 @@ function init() {
   createGrid()
 
   let alienArray = []
-  alienArray = cells.slice(11,22)
+  alienArray = cells.slice(12,21)
 
   function createAliens () {
     alienArray.forEach(alien => {
@@ -40,6 +41,23 @@ function init() {
     })
   }
   createAliens()
+  
+  function removeAliens () {
+    alienArray.forEach(alien => {
+      return alien.classList.remove(alienClass)
+    })
+  }
+
+
+  let laserArray = []
+  laserArray = cells.slice(99,110)
+
+  // function createLaser() {
+  //   laserArray.forEach(laser => {
+  //     return laser.classList.toggle(laserClass)
+  //   })
+  // }
+  // console.log(laserArray)
 
 /*ADDING and REMOVING SHIP*/
 
@@ -75,6 +93,7 @@ function init() {
   }
 
 
+
   function createLaser() {
     cells[laserPosition].classList.add('laser')
   }
@@ -82,11 +101,10 @@ function init() {
     cells[laserPosition].classList.remove('laser')
   }
 
-  let shootArray = []
-  shootArray = cells.slice(99,110)
 
-  console.log(typeof(Number(shootArray[0].innerText)))
 
+  
+  
 
   function moveLaser() {
     removeLaser()
@@ -97,9 +115,11 @@ function init() {
 
 
   function laserControls(event) {
+    laserPosition = shipCurrentPosition - width
     const key = event.keyCode
     const timerId = setInterval(() => {
       if (key === 32) {
+        console.log('laser moving')
         moveLaser()
       } else {
         clearInterval(timerId)
@@ -107,21 +127,58 @@ function init() {
     }, 200)
   }
 
+  
+  function moveAliensRight() {
+    removeAliens()
+    alienStartingPosition++
+    createAliens()
+
+  }
+
+  function moveAliensLeft() {
+    removeAliens()
+    alienStartingPosition--
+    createAliens()  
+  }
+
+  function moveAliensDown() {
+    removeAliens()
+    alienStartingPosition += width
+    createAliens()
+  }
+
+  function moveAllAliens() {
+
+  }
 
   /*EVENT LISTENERS*/
 
   document.addEventListener('keyup', laserControls)
   document.addEventListener('keydown', shipControls)
-  function laserKeys () {
-    for (let i = 0; i < shootArray.length; i++) 
-      shootArray[i].addEventListener('keyup', moveLaser)
-  }
+  // function laserKeys () {
+  //   for (let i = 0; i < shootArray.length; i++) 
+  //     shootArray[i].addEventListener('keyup', moveLaser)
+  // }
+  // laserKeys()
 
 
 }
 
 
 window.addEventListener('DOMContentLoaded', init)
+
+// for collision, classes need to be the same - remove/add image of explosion
+// set interval for moving aliens
+// declaring a variable to track 
+// track our movement sideways and down (both separately)
+// multiple checks for our movement
+
+
+
+
+
+
+
 
 
   // let laserArray = []
@@ -148,11 +205,6 @@ window.addEventListener('DOMContentLoaded', init)
   //     console.log('not working')
   //   }
   // }
-
-    //   for (let i = 0 ; i <= height - 3; i++) {
-    //     cells[shipCurrentPosition - width * i].classList.remove(laserClass)
-    //   }
-    // }
 
 
   // FOR LOOP FOR LASER MOVEMENT
