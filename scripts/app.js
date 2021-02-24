@@ -9,10 +9,10 @@ function init() {
   let timerId = null
 
   const shipClass = 'ship'
-  let shipStartingPosition = 104
   let shipCurrentPosition = 104
   
   const alienClass = 'alien'
+  let alienArray = [13, 14, 15, 16, 17, 18, 19]
   let alienStartingPosition = 12
   let laserAvailable = true
   let movement = 0
@@ -31,21 +31,20 @@ function init() {
       grid.appendChild(cell)
       cells.push(cell)
     }
+    createAliens()
     moveAllAliens()
   }
   createGrid()
 
-  // let alienArray = cells.slice(13,20)
+  //ALIEN - Create and Remove//
 
-  let alienArray = [13, 14, 15, 16, 17, 18, 19]
+  
   
   function createAliens () {
     alienArray.forEach(alien => {
       cells[alienStartingPosition + alien].classList.add(alienClass)
     })
   }
-  createAliens()
-
   function removeAliens () {
     alienArray.forEach(alien => {
       cells[alienStartingPosition + alien].classList.remove(alienClass)
@@ -55,14 +54,15 @@ function init() {
 
 /*ADDING and REMOVING SHIP*/
 
-  addShip(shipStartingPosition)
+  
 
-  function addShip(position) {
-    cells[position].classList.add(shipClass)
+  function addShip() {
+    cells[shipCurrentPosition].classList.add(shipClass)
   }
+  addShip()
 
-  function removeShip(position) {
-    cells[position].classList.remove(shipClass)
+  function removeShip() {
+    cells[shipCurrentPosition].classList.remove(shipClass)
   }
 
   /* CONTROLS FOR THE GAME */
@@ -70,7 +70,7 @@ function init() {
   function shipControls(event) {
     
     const key = event.keyCode
-    removeShip(shipCurrentPosition)
+    removeShip()
 
     if (key === 37 && shipCurrentPosition % width !== 0) {
       shipCurrentPosition--
@@ -85,7 +85,7 @@ function init() {
     } else {
       // console.log('invalid key')
     }
-    addShip(shipCurrentPosition)
+    addShip()
   }
 
 
@@ -112,18 +112,33 @@ function init() {
     laserPosition = shipCurrentPosition - width
     let laserMovingUp = true 
 
-    const timerId = setInterval(() => {
+    timerId = setInterval(() => {
       removeLaser()
       if (laserMovingUp) {
         moveLaser()
       } else {
         removeLaser()
       }
+
+      if (cells[laserPosition].classList.contains('alien')) {
+        console.log('please work')
+        laserAvailable = true
+        cells[laserPosition].classList.remove('alien')
+        alienArray = alienArray.filter(alien => {
+          return alien !== (laserPosition - alienStartingPosition) 
+        })
+      }
       if (laserPosition < width) {
         clearInterval(timerId)
         laserAvailable = true
       }
+
     }, 400)
+
+
+
+
+    
   }
 
 
@@ -163,35 +178,34 @@ function init() {
 
   function moveAllAliens() {
     let pushLeft = true 
-    console.log('hello')
     timerId = setInterval(() => {
-      console.log('time active')
       if (pushLeft) {
         moveAliensLeft()
       } else {
         moveAliensRight()
       }
       movement++
-      
-      if (movement === 2) {
+      if (movement === 3) {
         moveAliensDown()
         pushLeft = !pushLeft
         movement = 0
       } 
-
-      if (alienStartingPosition >= 99) {
+      console.log(alienStartingPosition)
+      if (alienStartingPosition === 44) {
         clearInterval(timerId)
+        removeAliens()
       }
     
     }, 1000)
   }
-  
 
 /* COLLISION */
 
   // function collisionLogic() {
-
-  //     console.log('collision active')
+  //   console.log('collision active')
+  //   if (cells[laserPosition].classList.contains('alien') && laserAvailable) {
+  //     console.log('if')
+  //     cells[laserPosition].classList.remove('alien')
   //   }
   // }
   // collisionLogic()
@@ -199,7 +213,6 @@ function init() {
 
   /*EVENT LISTENERS*/
 
-  document.addEventListener('keyup', laserControls)
   document.addEventListener('keydown', shipControls)
   // function laserKeys () {
   //   for (let i = 0; i < shootArray.length; i++) 
