@@ -31,8 +31,7 @@ function init() {
   }
   createGrid()
 
-  let alienArray = []
-  alienArray = cells.slice(12,21)
+  let alienArray = cells.slice(13,20)
 
   function createAliens () {
     alienArray.forEach(alien => {
@@ -48,9 +47,7 @@ function init() {
   }
 
 
-  let laserArray = []
-  laserArray = cells.slice(99,110)
-
+  let laserArray = cells.slice(99,110)
 
 /*ADDING and REMOVING SHIP*/
 
@@ -79,6 +76,8 @@ function init() {
       shipCurrentPosition++
     } else if (key === 40 && shipCurrentPosition + width <= width * height - 1) {
       shipCurrentPosition += width
+    } else if  (key === 32) {
+      laserControls()
     } else {
       // console.log('invalid key')
     }
@@ -102,12 +101,16 @@ function init() {
 
   function laserControls(event) {
     laserPosition = shipCurrentPosition - width
-    const key = event.keyCode  
+    let laserMovingUp = true 
+
     const timerId = setInterval(() => {
-      if (key === 32) {
-        console.log('laser moving')
+      removeLaser()
+      if (laserMovingUp) {
         moveLaser()
       } else {
+        removeLaser()
+      }
+      if (laserPosition < width) {
         clearInterval(timerId)
       }
     }, 200)
@@ -137,10 +140,8 @@ function init() {
   moveAllAliens(alienStartingPosition)
 
   function moveAllAliens() {
-    
   }
   moveAllAliens()
-  console.log()
 
   /*EVENT LISTENERS*/
 
