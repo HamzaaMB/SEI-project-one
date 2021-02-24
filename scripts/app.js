@@ -13,6 +13,7 @@ function init() {
   
   const alienClass = 'alien'
   let alienStartingPosition = 12
+  let laserAvailable = true
 
 
   const laserClass = 'laser'
@@ -99,7 +100,12 @@ function init() {
     createLaser()
   }
 
+
   function laserControls(event) {
+    if (!laserAvailable) {
+      return 
+    } 
+    laserAvailable = false
     laserPosition = shipCurrentPosition - width
     let laserMovingUp = true 
 
@@ -112,6 +118,7 @@ function init() {
       }
       if (laserPosition < width) {
         clearInterval(timerId)
+        laserAvailable = true
       }
     }, 200)
   }
@@ -141,7 +148,9 @@ function init() {
 
   function moveAllAliens() {
   }
-  moveAllAliens()
+
+
+
 
   /*EVENT LISTENERS*/
 
@@ -170,37 +179,3 @@ window.addEventListener('DOMContentLoaded', init)
 
 
 
-
-
-
-  // let laserArray = []
-  // laserArray = cells.slice(99,110)
-  // function shootLaser() {
-  //   laserArray.forEach(laser => {
-  //     return Number(laser.innerText) - width
-  //   })
-  // }
-  // shootLaser()
-
- // function laserControls(event) {
-  //   const key = event.keyCode
-  //   let laserCurrentPosition = shipCurrentPosition
-  //   if (key === 32) {
-  //     for (let i = 1; i <= height - 2; i++) {
-  //       const timerId = setInterval(() => {
-  //         cells[laserCurrentPosition - width * i].classList.add(laserClass)
-  //         console.log('going up')
-  //         clearInterval(timerId)
-  //       }, 300 * i)
-  //     }
-  //   } else {
-  //     console.log('not working')
-  //   }
-  // }
-
-
-  // FOR LOOP FOR LASER MOVEMENT
-// const laserMove = shipCurrentPosition - width
-// For (let i = 1; i <= height - 1; i++) {
-  // console.log(i)
-  // cells[laserMove * i].classList.add(laserClass)m
