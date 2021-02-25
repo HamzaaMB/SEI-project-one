@@ -2,25 +2,54 @@ function init() {
   
 
   const grid = document.querySelector('.grid')
+  const introMessage = document.createElement('h2')
   const width = 16
   const height = 10
   const cellCount = width * height
   const cells = []
   let timerId = null
 
+// Adding content to elements
+
+
   const shipClass = 'ship'
   let shipCurrentPosition = 151
   
   const alienClass = 'alien'
-  let alienArray = [13, 14, 15, 16, 17, 18, 19]
-  let alienStartingPosition = 12
+  let alienArray = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+  let alienStartingPosition = 0
   let laserAvailable = true
   let movement = 0
-  let points = 0
+  let score = 0
 
 
   const laserClass = 'laser'
   let laserPosition = 0
+
+
+  function removeIntro() {
+    const h2 = document.querySelector('h2')
+    h2.parentNode.removeChild(h2)
+  }
+
+  function createIntro (event) {
+    introMessage.textContent = 'press any key to begin'
+    grid.appendChild(introMessage)
+    if (event) {
+      removeIntro()
+    }
+  }  
+  createIntro()
+  
+  
+  function beginGame (event) {
+    if (event) {
+      event.preventDefault()
+      createGrid()
+      addShip()
+      
+    } 
+  }
 
 
 /* CREATING GRID and ALIENS */
@@ -35,7 +64,7 @@ function init() {
     createAliens()
     moveAllAliens()
   }
-  createGrid()
+  // createGrid()
 
   //ALIEN - Create and Remove//
 
@@ -60,7 +89,6 @@ function init() {
   function addShip() {
     cells[shipCurrentPosition].classList.add(shipClass)
   }
-  addShip()
   function removeShip() {
     cells[shipCurrentPosition].classList.remove(shipClass)
   }
@@ -120,18 +148,19 @@ function init() {
       }
       if (cells[laserPosition].classList.contains('alien')) {
         laserAvailable = true
-        cells[laserPosition].classList.remove('alien')
         removeLaser()
+        cells[laserPosition].classList.remove('alien')
         alienArray = alienArray.filter(alien => {
           return alien !== (laserPosition - alienStartingPosition) 
         })
+        score += 1000
       }
       if (laserPosition < width) {
         clearInterval(timerId)
         removeLaser()
         laserAvailable = true
       }
-    }, 400)
+    }, 300)
   }
 
 
@@ -165,23 +194,25 @@ function init() {
         moveAliensRight()
       }
       movement++
-      if (movement === 4) {
+      if (movement === 3) {
         moveAliensDown()
         pushLeft = !pushLeft
         movement = 0
       } 
       console.log(alienStartingPosition)
-      if (alienStartingPosition > 137) {
+      if (alienStartingPosition > 127) {
         clearInterval(timerId)
         removeAliens()
+        console.log('you lose')
       }
     
-    }, 1000)
+    }, 500)
   }
 
   /*EVENT LISTENERS*/
-
+  document.addEventListener('keyup', beginGame)
   document.addEventListener('keydown', shipControls)
+  document.addEventListener('keyup', createIntro)
   // function laserKeys () {
   //   for (let i = 0; i < shootArray.length; i++) 
   //     shootArray[i].addEventListener('keyup', moveLaser)
