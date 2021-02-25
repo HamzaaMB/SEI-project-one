@@ -6,7 +6,7 @@
 
 h2 {
   text-transform: uppercase;
-  color: black;
+  color: rgb(243, 242, 250);
   font-family: 'Uncial Antiqua', cursive;
   font-size: 45px;
 }
@@ -39,10 +39,10 @@ body {
 }
 
 .grid div {
-  border: 1px solid lightgrey;
   flex-grow: 1;
   height: 10%;
   width: 6%;
+  font-size: 0;
 }
 
 
@@ -69,7 +69,15 @@ body {
 }
 
 .live-score {
-  height: 60px;
-  width: 60px;
-
+flex-direction: row;
+height: 50px;
+width: 335px;
+position: absolute;
+top: 5%;
+left: 8%;
+box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+font-family: 'Uncial Antiqua', cursive;
+text-align: justify;
+font-size: 35px;
+color: white;
 }
