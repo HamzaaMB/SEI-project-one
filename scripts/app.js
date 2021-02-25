@@ -3,6 +3,7 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const introMessage = document.createElement('h2')
+  const liveScore = document.querySelector('.live-score')
   const width = 16
   const height = 10
   const cellCount = width * height
@@ -154,6 +155,7 @@ function init() {
         clearInterval(timerId)
         cells[laserPosition].classList.remove('alien')
         score += 1000
+        liveScore.innerHTML = 'Score: ' + score
         console.log('score', score)
         alienArray = alienArray.filter(alien => {
           return alien !== (laserPosition - alienStartingPosition) 
@@ -211,7 +213,7 @@ function init() {
         clearInterval(timerId)
         loseGame()
       }
-    }, 500)
+    }, 5000)
   }
 
 
