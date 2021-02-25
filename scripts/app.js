@@ -24,13 +24,8 @@ function init() {
 
 
   const laserClass = 'laser'
-  let laserPosition = 0
+  let laserPosition = 135
 
-
-  function removeIntro() {
-    const h2 = document.querySelector('h2')
-    h2.parentNode.removeChild(h2)
-  }
 
   function createIntro (event) {
     introMessage.textContent = 'press any key to begin'
@@ -40,6 +35,12 @@ function init() {
     }
   }  
   createIntro()
+
+  function removeIntro() {
+    const h2 = document.querySelector('h2')
+    h2.parentNode.removeChild(h2)
+  }
+
   
   
   function beginGame (event) {
@@ -124,6 +125,7 @@ function init() {
   function removeLaser() {
     cells[laserPosition].classList.remove(laserClass)
   }
+  
   function moveLaser() {
     removeLaser()
     laserPosition = laserPosition - width
@@ -144,23 +146,28 @@ function init() {
       if (laserMovingUp) {
         moveLaser()
       } else {
-        removeLaser()
+        removeLaser() //ask about why this is here.
       }
       if (cells[laserPosition].classList.contains('alien')) {
         laserAvailable = true
         removeLaser()
+        clearInterval(timerId)
         cells[laserPosition].classList.remove('alien')
+        score += 1000
+        console.log('score', score)
         alienArray = alienArray.filter(alien => {
           return alien !== (laserPosition - alienStartingPosition) 
         })
-        score += 1000
       }
       if (laserPosition < width) {
         clearInterval(timerId)
         removeLaser()
         laserAvailable = true
       }
-    }, 300)
+    }, 3)
+    if (alienArray.length === 0) {
+      winGame()
+    }
   }
 
 
@@ -196,17 +203,29 @@ function init() {
       movement++
       if (movement === 3) {
         moveAliensDown()
-        pushLeft = !pushLeft
         movement = 0
+        pushLeft = !pushLeft
       } 
       console.log(alienStartingPosition)
-      if (alienStartingPosition > 127) {
+      if (alienStartingPosition >= 128) {
         clearInterval(timerId)
-        removeAliens()
-        console.log('you lose')
+        loseGame()
       }
-    
-    }, 5000)
+    }, 50)
+  }
+
+
+  function loseGame() {
+    removeAliens()
+    removeShip()
+    removeLaser()
+    document.removeEventListener('keydown', shipControls)
+    const finalScore = score
+    console.log('my final score>>', finalScore)
+  }
+
+  function winGame() {
+    console.log('won! final score>>', score)
   }
 
   /*EVENT LISTENERS*/
