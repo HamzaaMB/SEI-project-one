@@ -2,14 +2,14 @@ function init() {
   
 
   const grid = document.querySelector('.grid')
-  const width = 11
+  const width = 16
   const height = 10
   const cellCount = width * height
   const cells = []
   let timerId = null
 
   const shipClass = 'ship'
-  let shipCurrentPosition = 104
+  let shipCurrentPosition = 151
   
   const alienClass = 'alien'
   let alienArray = [13, 14, 15, 16, 17, 18, 19]
