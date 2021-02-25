@@ -43,12 +43,11 @@ function init() {
   
   
   function beginGame (event) {
+
     if (event) {
-      event.preventDefault()
+      document.removeEventListener('keyup', beginGame)
       createGrid()
-      addShip()
-      
-    } 
+    }
   }
 
 
@@ -63,6 +62,7 @@ function init() {
     }
     createAliens()
     moveAllAliens()
+    addShip()
   }
   // createGrid()
 
@@ -206,7 +206,7 @@ function init() {
         console.log('you lose')
       }
     
-    }, 500)
+    }, 5000)
   }
 
   /*EVENT LISTENERS*/
