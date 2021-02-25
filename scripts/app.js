@@ -171,25 +171,13 @@ function init() {
         movement = 0
       } 
       console.log(alienStartingPosition)
-      if (alienStartingPosition > 86) {
+      if (alienStartingPosition > 137) {
         clearInterval(timerId)
         removeAliens()
       }
     
     }, 1000)
   }
-
-/* COLLISION */
-
-  // function collisionLogic() {
-  //   console.log('collision active')
-  //   if (cells[laserPosition].classList.contains('alien') && laserAvailable) {
-  //     console.log('if')
-  //     cells[laserPosition].classList.remove('alien')
-  //   }
-  // }
-  // collisionLogic()
-
 
   /*EVENT LISTENERS*/
 
@@ -206,11 +194,6 @@ function init() {
 
 window.addEventListener('DOMContentLoaded', init)
 
-// for collision, classes need to be the same - remove/add image of explosion
-// set interval for moving aliens
-// declaring a variable to track 
-// track our movement sideways and down (both separately)
-// multiple checks for our movement
 
 
 

@@ -5,7 +5,8 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: rgb(45, 180, 233);
+  width: 100%;
+
 }
 
 .grid-wrapper {
@@ -13,6 +14,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url(../images/magical-sky-background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .grid {
