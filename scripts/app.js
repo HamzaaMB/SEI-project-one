@@ -211,7 +211,7 @@ function init() {
         clearInterval(timerId)
         loseGame()
       }
-    }, 50)
+    }, 500)
   }
 
 

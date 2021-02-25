@@ -67,3 +67,9 @@ body {
     background-repeat: no-repeat;
     cursor: pointer;
 }
+
+.live-score {
+  height: 60px;
+  width: 60px;
+
+}
