@@ -16,6 +16,7 @@ function init() {
   let alienStartingPosition = 12
   let laserAvailable = true
   let movement = 0
+  let points = 0
 
 
   const laserClass = 'laser'
@@ -60,7 +61,6 @@ function init() {
     cells[shipCurrentPosition].classList.add(shipClass)
   }
   addShip()
-
   function removeShip() {
     cells[shipCurrentPosition].classList.remove(shipClass)
   }
@@ -91,12 +91,11 @@ function init() {
 
 
   function createLaser() {
-    cells[laserPosition].classList.add('laser')
+    cells[laserPosition].classList.add(laserClass)
   }
   function removeLaser() {
-    cells[laserPosition].classList.remove('laser')
+    cells[laserPosition].classList.remove(laserClass)
   }
-
   function moveLaser() {
     removeLaser()
     laserPosition = laserPosition - width
@@ -119,26 +118,20 @@ function init() {
       } else {
         removeLaser()
       }
-
       if (cells[laserPosition].classList.contains('alien')) {
-        console.log('please work')
         laserAvailable = true
         cells[laserPosition].classList.remove('alien')
+        removeLaser()
         alienArray = alienArray.filter(alien => {
           return alien !== (laserPosition - alienStartingPosition) 
         })
       }
       if (laserPosition < width) {
         clearInterval(timerId)
+        removeLaser()
         laserAvailable = true
       }
-
     }, 400)
-
-
-
-
-    
   }
 
 
@@ -162,19 +155,6 @@ function init() {
     createAliens()
   }
 
-// moving aliens 
-// boolean pushLeft (start it at true) 
-// setinterval 
-// write a condition, which will check if the boolean is true, if it is true, it will move left, if it is false it will move right
-// variable to track our movements (add one)
-// write another condition, which will check our variable, call our move down function, flip the boolean, reset our variable back 0 
-// write a condition to check when you have reached cell 100 clear the interval 
-// multiple checks on our movements (sideways and down)
-
-// collision 
-// checking classes of aliens and laser
-
-  
 
   function moveAllAliens() {
     let pushLeft = true 
@@ -185,13 +165,13 @@ function init() {
         moveAliensRight()
       }
       movement++
-      if (movement === 3) {
+      if (movement === 4) {
         moveAliensDown()
         pushLeft = !pushLeft
         movement = 0
       } 
       console.log(alienStartingPosition)
-      if (alienStartingPosition === 44) {
+      if (alienStartingPosition > 86) {
         clearInterval(timerId)
         removeAliens()
       }
