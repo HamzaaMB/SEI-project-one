@@ -155,7 +155,6 @@ function init() {
     console.log('array', alienArray.length)
     if (alienArray.length === 1) {
       winGame()
-      
     }
   }
 
@@ -219,7 +218,6 @@ function init() {
     if (event) {
       location.reload()
     }
-    
   }
 
   function addWinGame() {
@@ -233,12 +231,9 @@ function init() {
     removeShip()
     removeLaser()
     addWinGame()
-
     if (event) {
       location.reload()
-    
     }
-    console.log('won! final score>>', score)
   }
 
   /*EVENT LISTENERS*/
