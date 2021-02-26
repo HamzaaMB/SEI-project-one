@@ -151,7 +151,7 @@ function init() {
         removeLaser()
         laserAvailable = true
       }
-    }, 2)
+    }, 250)
     console.log('array', alienArray.length)
     if (alienArray.length === 1) {
       winGame()
@@ -197,7 +197,7 @@ function init() {
         clearInterval(timerId)
         loseGame()
       }
-    }, 60)
+    }, 6000)
   }
 /*WIN/LOSE GAME*/
 
