@@ -1,17 +1,17 @@
 function init() {
   
+/* VARIABLES */
 
   const grid = document.querySelector('.grid')
-  const introMessage = document.createElement('h2')
+  const introMessage = document.createElement('h1')
   const liveScore = document.querySelector('.live-score')
+  const endGameMessage = document.createElement('h2')
+  const finalScore = document.querySelector('.final-score')
   const width = 16
   const height = 10
   const cellCount = width * height
   const cells = []
   let timerId = null
-
-// Adding content to elements
-
 
   const shipClass = 'ship'
   let shipCurrentPosition = 151
@@ -22,7 +22,6 @@ function init() {
   let laserAvailable = true
   let movement = 0
   let score = 0
-
 
   const laserClass = 'laser'
   let laserPosition = 135
@@ -38,14 +37,11 @@ function init() {
   createIntro()
 
   function removeIntro() {
-    const h2 = document.querySelector('h2')
-    h2.parentNode.removeChild(h2)
+    const h1 = document.querySelector('h1')
+    h1.parentNode.removeChild(h1)
   }
 
-  
-  
   function beginGame (event) {
-
     if (event) {
       document.removeEventListener('keyup', beginGame)
       createGrid()
@@ -66,12 +62,7 @@ function init() {
     moveAllAliens()
     addShip()
   }
-  // createGrid()
 
-  //ALIEN - Create and Remove//
-
-  
-  
   function createAliens () {
     alienArray.forEach(alien => {
       cells[alienStartingPosition + alien].classList.add(alienClass)
@@ -83,10 +74,7 @@ function init() {
     })
   }
 
-
 /*ADDING and REMOVING SHIP*/
-
-  
 
   function addShip() {
     cells[shipCurrentPosition].classList.add(shipClass)
@@ -118,8 +106,6 @@ function init() {
     addShip()
   }
 
-
-
   function createLaser() {
     cells[laserPosition].classList.add(laserClass)
   }
@@ -132,7 +118,6 @@ function init() {
     laserPosition = laserPosition - width
     createLaser()
   }
-
 
   function laserControls() {
     if (!laserAvailable) {
@@ -147,7 +132,7 @@ function init() {
       if (laserMovingUp) {
         moveLaser()
       } else {
-        removeLaser() //ask about why this is here.
+        removeLaser()
       }
       if (cells[laserPosition].classList.contains('alien')) {
         laserAvailable = true
@@ -166,15 +151,16 @@ function init() {
         removeLaser()
         laserAvailable = true
       }
-    }, 3)
-    if (alienArray.length === 0) {
+    }, 2)
+    console.log('array', alienArray.length)
+    if (alienArray.length === 1) {
       winGame()
+      
     }
   }
 
+/*MOVEMENT OF ALIENS*/
 
-
-  
   function moveAliensRight() {
     removeAliens()
     alienStartingPosition++
@@ -192,7 +178,6 @@ function init() {
     alienStartingPosition += width
     createAliens()
   }
-
 
   function moveAllAliens() {
     let pushLeft = true 
@@ -213,20 +198,46 @@ function init() {
         clearInterval(timerId)
         loseGame()
       }
-    }, 5000)
+    }, 60)
+  }
+/*WIN/LOSE GAME*/
+
+  function addLoseGame () {
+    endGameMessage.textContent = 'You lose! Click here to play again'
+    grid.appendChild(endGameMessage)
   }
 
 
-  function loseGame() {
+  function loseGame(event) {
+    document.removeEventListener('keydown', shipControls)
+    document.addEventListener('click', loseGame)
     removeAliens()
     removeShip()
     removeLaser()
-    document.removeEventListener('keydown', shipControls)
-    const finalScore = score
-    console.log('my final score>>', finalScore)
+    addLoseGame()
+
+    if (event) {
+      location.reload()
+    }
+    
   }
 
-  function winGame() {
+  function addWinGame() {
+    endGameMessage.textContent = 'You win! Click here to play again'
+    grid.appendChild(endGameMessage)
+  }
+  function winGame(event) {
+    document.removeEventListener('keydown', shipControls)
+    document.addEventListener('click', winGame)
+    removeAliens()
+    removeShip()
+    removeLaser()
+    addWinGame()
+
+    if (event) {
+      location.reload()
+    
+    }
     console.log('won! final score>>', score)
   }
 
@@ -234,11 +245,8 @@ function init() {
   document.addEventListener('keyup', beginGame)
   document.addEventListener('keydown', shipControls)
   document.addEventListener('keyup', createIntro)
-  // function laserKeys () {
-  //   for (let i = 0; i < shootArray.length; i++) 
-  //     shootArray[i].addEventListener('keyup', moveLaser)
-  // }
-  // laserKeys()
+
+
 
 
 }
