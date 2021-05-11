@@ -13,7 +13,7 @@ First project for the Software Engineering Immersive course. Week long solo proj
 
 ## Deployment
 
-App has been deployed with GitHub Pages can be viewed here: [Zeus Invades](hamzaamb.github.io/SEI-project-one/)
+App has been deployed with GitHub Pages can be viewed here: [Zeus Invades](https://hamzaamb.github.io/SEI-project-one/)
 
 ## Technologies Used
 
@@ -35,5 +35,5 @@ Designed by Taito in Japan, Space Invaders hit arcades in 1978 and  is one of th
 
 My version of the game involves the mighty Zeus and his battles in the sky. 
 
-[screenshot](https://github.com/HamzaaMB/SEI-project-one/blob/main/screenshots/begin.png)
+![screenshot](https://github.com/HamzaaMB/SEI-project-one/blob/main/screenshots/begin.png)
 
