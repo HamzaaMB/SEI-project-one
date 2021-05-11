@@ -49,18 +49,18 @@ After the completion of the grid, I loaded my ‘ship’ which is the player, at
 
 Functions relating to adding and removing of the ship are passed through the block of controls, which listens out for each ‘keydown’, removes ship from previous position and adds it to the new position on grid, based on which key is pressed.
 
-![screenshot]()
+![screenshot](screenshots/LaserLogic.png)
 
 After the ship was added to the grid and able to move freely based on the user, I had to restrict the movement for the player only to the bottom grid, where they’d only be able to move left/right. 
 
 Aliens were then spawned and this was done by assigning their starting positions on the grid.
 
-![screenshot]()
+![screenshot](screenshots/alienPosition.png)
 
 The collision logic came next, laser movements across the grid were controlled by setInterval and the logic that involved the collision of laser and alien triggered the function to remove both images, clear the interval and add score for the player. By the end of the function, the win logic is implemented once the array that holds alien is empty. 
 
-![screenshot]()
-![screenshot]()
+![screenshot](screenshots/laserControls.png)
+![screenshot](screenshots/collision.png)
 
 ## Bugs
 
