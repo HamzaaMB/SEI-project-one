@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Zeus Invades - GA Project One
 
 ## Brief
@@ -37,7 +36,4 @@ Designed by Taito in Japan, Space Invaders hit arcades in 1978 and  is one of th
 My version of the game involves the mighty Zeus and his battles in the sky. 
 
 
-![being-screenshot] (images/screenshots/Begin.png)
-=======
-# SEI-project-one
->>>>>>> ed9570950ef9401140b317cd7cd29271e0dd1e3b
+![](./images/screenshots/Begin.png)
