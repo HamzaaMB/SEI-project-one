@@ -13,7 +13,7 @@ First project for the Software Engineering Immersive course. Week long solo proj
 
 ## Deployment
 
-App has been deployed with GitHub Pages can be viewed here: [here](hamzaamb.github.io/SEI-project-one/)
+App has been deployed with GitHub Pages can be viewed here: (hamzaamb.github.io/SEI-project-one/)
 
 ## Technologies Used
 
