@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Zeus Invades - GA Project One
 
 ## Brief
@@ -37,3 +38,6 @@ My version of the game involves the mighty Zeus and his battles in the sky.
 
 
 ![being-screenshot] (images/screenshots/Begin.png)
+=======
+# SEI-project-one
+>>>>>>> ed9570950ef9401140b317cd7cd29271e0dd1e3b
